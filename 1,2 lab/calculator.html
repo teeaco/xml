@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Калькулятор</title>
+  <link rel="stylesheet" href="calculator.css"> 
+</head>
+
+<body>
+  <div class = "container">
+  <div class = "calculator"> <!-- div - это базовый html-контейнер, который может содержать в себе другие html-элементы. -->
+    <!-- блок с экраном калькулятора, где будет выводиться результат вычислений. -->
+     
+    <div id = result class="result" >
+        0
+      </div>
+
+    <!-- блок с кнопками калькулятора. -- на 5 пункте остановилась>
+    <div>
+           !--горизонтальный ряд из четырех кнопок-->
+    <div class="theme-container">
+        <button id="theme_light" class="theme">L</button>
+        <a href="https://github.com/teeaco/xml" class="link-button" >github</a>
+    </div>
+ 
+      <div class = main>  
+        <button id="btn_op_clear" class="my-btn secondary">C</button>
+        <button id="btn_op_sign" class="my-btn secondary">+/-</button>
+        <button id="btn_op_percent" class="my-btn secondary">%</button>
+        <button id="btn_op_div" class="my-btn secondary">/</button>
+      </div>
+
+      <div class = main >
+        
+        <button id="btn_digit_7" class="my-btn">7</button>
+        <button id="btn_digit_8" class="my-btn">8</button>
+        <button id="btn_digit_9" class="my-btn">9</button>
+        
+        <button id="btn_op_mult" class="my-btn primary">x</button>
+      </div>
+
+      <div class = main>
+        <button id="btn_digit_7" class="my-btn">4</button>
+        <button id="btn_digit_8" class="my-btn">5</button>
+        <button id="btn_digit_9" class="my-btn">6</button>
+        
+        <button id="btn_op_minus" class="my-btn primary">-</button>
+      </div>
+
+      <div class = main>
+        <button id="btn_digit_7" class="my-btn">1</button>
+        <button id="btn_digit_8" class="my-btn">2</button>
+        <button id="btn_digit_9" class="my-btn">3</button>
+
+        <button id="btn_op_plus" class="my-btn primary">+</button>
+      </div>
+
+
+      <div class = main>
+
+        <button id="btn_." class="my-btn">.</button>
+        <button id="btn_digit_0" class="my-btn">0</button>
+        <button id="btn_op_equal" class="my-btn primary execute">=</button>
+    </div>
+    <h1>ЛР выполнена Бронниковой Марией Евгеньевной</h1>
+    <div>
+      <label for="dropdown" class = "text">Выберите монстра:</label>
+      <select id="dropdown">
+        <option value="option1">напевец</option>
+        <option value="option2">трынькажу</option>
+        <option value="option3">смычорог</option>
+      </select>
+
+      <details class = "text">
+        <summary>Автор</summary>
+        <p><strong>ФИО:</strong> Бронникова Мария Евгеньевна</p>
+        <p><strong>Группа:</strong> ИУ5-45Б</p>
+      </details>
+      <div class = text>
+        <h1>Цель лабораторной работы</h1>
+        <p>Цель данной лабораторной работы - <mark>знакомство</mark> с инструментами построения пользовательских интерфейсов web-сайтов:<mark>HTML</mark>, <mark>CSS</mark>. В ходе выполнения работы, вам предстоит ознакомиться с кодом реализации простого калькулятора, и затем выполнить задания по варианту.</p>
+      </div>
+            
+    </div>
+  </div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
