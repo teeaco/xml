@@ -119,12 +119,10 @@ window.onload = function(){
             a = a.slice(0, -1); 
             if (a === '') a = '0'; 
             outputElement.innerHTML = a;
-            a = 0;
         } else {
             b = b.slice(0, -1); 
             if (b === '') b = '0'; 
             outputElement.innerHTML = b;
-            b = 0;
         }
     }
 
@@ -177,7 +175,41 @@ window.onload = function(){
             outputElement.innerHTML = b;
         }
     }
-    document.getElementById("btn_change_color").onclick = function(){
-        document.result.classList.toggle('color');
+    document.getElementById("btn_change_color").onclick = function() {
+        outputElement.classList.toggle("color"); // Переключаем класс color
+    }
+    document.getElementById("btn_convert_temp").onclick = function() {
+        if (!selectedOperation) {
+            let celsius = a;
+            if (!isNaN(celsius)) {
+                let fahrenheit = (celsius * 9/5) + 32;
+                a = fahrenheit.toString();
+                outputElement.innerHTML = a;
+            }
+        } else {
+            let celsius = b;
+            if (!isNaN(celsius)) {
+                let fahrenheit = (celsius * 9/5) + 32;
+                b = fahrenheit.toString();
+                outputElement.innerHTML = b;
+            }
+        }
+    }
+    document.getElementById("btn_convert_temp_c").onclick = function() {
+        if (!selectedOperation) {
+            let celsius = a;
+            if (!isNaN(celsius)) {
+                let fahrenheit = (celsius - 32) / 1.8;
+                a = fahrenheit.toString();
+                outputElement.innerHTML = a;
+            }
+        } else {
+            let celsius = b;
+            if (!isNaN(celsius)) {
+                let fahrenheit = (celsius - 32) / 1.8;
+                b = fahrenheit.toString();
+                outputElement.innerHTML = b;
+            }
+        }
     }
     };

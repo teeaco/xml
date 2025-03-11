@@ -83,6 +83,10 @@ body.dark-theme{
     background : #13141f; /* цвет кнопки сервый */
   }
   
+  .my-btn.rofls{
+    background : #3d306c;
+    width : 45px;
+  }
   /* селектор для кнопки расчета выражения (=) */
   .my-btn.execute { 
     width: 115px;          /* сделаем кнопку шире других */
@@ -116,7 +120,7 @@ body.dark-theme{
   }
   /* селектор для поля вывода результата */
   .result { 
-    width: 231px;
+    width: 300px;
     height: 70px;
     margin-bottom: 10px;         /* отступ снизу */
     padding-right: 10px;         /* выступ справа */
@@ -129,7 +133,7 @@ body.dark-theme{
     border-radius: 10px; 
   }
 
-  .color{
+  .result.color{
     background: #461345;
   }
 
