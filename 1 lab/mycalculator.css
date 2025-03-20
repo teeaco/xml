@@ -120,7 +120,7 @@ body.dark-theme{
   }
   /* селектор для поля вывода результата */
   .result { 
-    width: 300px;
+    width: 235px;
     height: 70px;
     margin-bottom: 10px;         /* отступ снизу */
     padding-right: 10px;         /* выступ справа */
