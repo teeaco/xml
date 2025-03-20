@@ -1,0 +1,157 @@
+body {
+  display: flex;              /* Для центрирования калькулятора */
+  justify-content: center;    /* Горизонтальное центрирование */
+  align-items: center;         /* Вертикальное центрирование */
+  min-height: 100vh;          /* Занимаем всю высоту экрана */
+  background-color: #2b2b2b;  /* Темно-серый фон */
+  font-family: 'Rubik', monospace; /* Аккуратный шрифт */
+  background-image: url('Screenshot_2.png'); /* Добавляем изображение на фон */
+  background-size: cover;       /* Растягиваем изображение на весь фон */
+  background-blend-mode: multiply; /* Затемняем фон */
+}
+
+body.dark-theme{
+  display: flex;              /* Для центрирования калькулятора */
+  justify-content: center;    /* Горизонтальное центрирование */
+  align-items: center;         /* Вертикальное центрирование */
+  min-height: 100vh;          /* Занимаем всю высоту экрана */
+  font-family: 'Rubik', monospace; /* Аккуратный шрифт */
+  background-image: url('Screenshot_1.png'); /* Добавляем изображение на фон */
+  background-size: cover;       /* Растягиваем изображение на весь фон */
+}
+
+.container {
+  display: flex;
+  align-items: center; /* Выравниваем элементы по вертикали */
+  justify-content: center;
+  min-height: 100vh;  
+}
+.link-button {
+  margin-top: 5px;             /* задаем отступ от кнопки сверху*/
+  text-decoration: none; /* Убираем подчеркивание у ссылки */
+  background: #ffc500; /* Цвет фона кнопки */
+  color: #1e0c1b; /* Цвет текста */
+  padding: 10px 20px; /* Внутренние отступы */
+  border-radius: 5px; /* Скругление углов */
+  font-family: 'Rubik', monospace; /* Шрифт */
+  font-size: 1rem; /* Размер шрифта */
+  font-weight: bold; /* Жирный шрифт */
+  cursor: pointer; /* Курсор в виде указателя */
+}
+.link-button:hover{
+  background-color: #997600;
+}
+
+/* Общие стили */
+
+/* опишем базовый стиль кнопки калькулятора */
+.my-btn { 
+    margin-right: 5px;           /* задаем отступ от кнопки справа */
+    margin-top: 5px;             /* задаем отступ от кнопки сверху*/
+    width: 50px;                 /* задаем ширину кнопки */
+    height: 50px;                /* задаем высоту кнопки */
+    border-radius: 10%;          /* округляем кнопку */
+    border: none;                /* отключаем обводку */
+    background:  #520044;       /* задаем серый цвет кнопки */
+    color: #fff;                /* задаем белый цвет текста внутри кнопки */
+    font-size: 1.5rem;           /* увеличим размер шрифта */
+    font-family: 'Rubik', monospace; /* сменим шрифт */
+    font-weight: lighter;
+    cursor: pointer;             /* при наведении на кнопку курсор будет изменен
+                                    со стрелки на 'указательный палец' */
+    user-select: none;           /* отключаем возможность выделить текст внутри кнопки */
+  } 
+  
+
+  /* hover - это состояние элемента, когда на него наведен курсор */
+  .my-btn:hover {
+    background: #4b3d49; /* при наведение курсора на кнопку, она будет окрашена в серый */
+  }
+  
+  /* active - это состояние активации элемента. В случае кнопки - нажатие на нее */
+  .my-btn:active {
+    filter: brightness(130%); /* увеличим интенсивность цвета для эффекта вспышки */
+  }
+  
+  /* селектор для кнопок первостепенных операций */
+  .my-btn.primary { 
+    background: #a69aa4; /* цвет кнопки оранжевый */
+  }
+  
+  /* селектор для кнопок второстепенных операций */
+  .my-btn.secondary { 
+    background : #13141f; /* цвет кнопки сервый */
+  }
+  
+  .my-btn.rofls{
+    background : #3d306c;
+    width : 45px;
+  }
+  /* селектор для кнопки расчета выражения (=) */
+  .my-btn.execute { 
+    width: 115px;          /* сделаем кнопку шире других */
+    border-radius: 10px;   /* подкорректируем округлость */
+  }
+  
+  .theme{
+    margin-right: 10px;           /* задаем отступ от кнопки справа */
+    margin-top: 5px;             /* задаем отступ от кнопки сверху*/
+    width: 30px;                 /* задаем ширину кнопки */
+    height: 30px;                /* задаем высоту кнопки */
+    border-radius: 10%;          /* округляем кнопку */
+    border: none;                /* отключаем обводку */
+    background:  #520044;       /* задаем серый цвет кнопки */
+    color:#f5f3f5;                /* задаем белый цвет текста внутри кнопки */
+    font-size: 1.5rem;           /* увеличим размер шрифта */
+    font-family: 'Rubik', monospace; /* сменим шрифт */
+    font-weight: lighter;
+    cursor: pointer;             /* при наведении на кнопку курсор будет изменен
+                                    со стрелки на 'указательный палец' */
+    user-select: none;           /* отключаем возможность выделить текст внутри кнопки */
+  }
+    
+  .calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование содержимого калькулятора */
+  }
+  .theme:hover {
+    background: #4b3d49; /* при наведение курсора на кнопку, она будет окрашена в серый */
+  }
+  /* селектор для поля вывода результата */
+  .result { 
+    width: 300px;
+    height: 70px;
+    margin-bottom: 10px;         /* отступ снизу */
+    padding-right: 10px;         /* выступ справа */
+    background: #13141f; /* цвет можно задавать и таким образом */
+    text-align: right;           /* примагнитим текст к правой стороне */
+    color:#fff;              /* цвет текста белый */
+    font-size: 1.5rem;
+    font-family: 'Rubik', monospace;
+    font-weight: bold;
+    border-radius: 10px; 
+  }
+
+  .result.color{
+    background: #461345;
+  }
+
+  h1 {               
+    color:#f5f3f5;    
+    font-size: 20px;            
+  } 
+  .text{
+    color: #f5f3f5;
+  }
+
+  .theme-container {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Кнопка L справа */
+  }
+
+  mark{
+    background-color: #ffc500;
+  }
+ 
