@@ -80,7 +80,7 @@ body.dark-theme{
   
   /* селектор для кнопок второстепенных операций */
   .my-btn.secondary { 
-    background : #13141f; /* цвет кнопки сервый */
+    background : #13141f; 
   }
   
   .my-btn.rofls{
