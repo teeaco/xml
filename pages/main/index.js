@@ -3,6 +3,7 @@ import { FilterComponent } from "../../components/filter/index.js";
 import { CardComponent } from "../../components/card/index.js";
 import { mockData } from "../../mock/data.js";
 import { DetailsPage } from "../details/index.js";
+import { AnagramsComponent } from "../../components/anagrams/index.js";
 
 export class MainPage {
   constructor(parent) {
@@ -72,6 +73,9 @@ export class MainPage {
             .btn-success{
               background-color: #ffc500 !important;
             }
+            .btn-info{
+              background-color: #ff97fa !important;
+            }
       </style>
       <button class="btn btn-success mb-3 add-btn">Добавить карточку</button>
       <div id="cards-container" class="d-flex flex-wrap gap-3"></div>
@@ -83,5 +87,15 @@ export class MainPage {
 
     // Карточки
     this.renderCards();
+
+    
+    const anagramsBtn = document.createElement('button');
+    anagramsBtn.className = 'btn btn-info mb-3 mt-3';
+    anagramsBtn.textContent = 'Показать анаграммы';
+    anagramsBtn.onclick = () => {
+      const words = ['стол', 'листок', 'слот', 'кот', 'ток'];
+      new AnagramsComponent(this.parent).render(words);
+    };
+    this.parent.appendChild(anagramsBtn);
   }
 }
