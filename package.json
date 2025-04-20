@@ -1,0 +1,22 @@
+{
+  "name": "lab_3",
+  "version": "1.0.0",
+  "description": "jnvsjnme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teeaco/xml.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teeaco/xml/issues"
+  },
+  "homepage": "https://github.com/teeaco/xml#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.5"
+  }
+}
