@@ -35,9 +35,9 @@ export class DetailsPage {
         <div class="card">
           <img src="${card.image}" class="card-img-top" style="max-width: 300px; height: auto;">
           <div class="card-body">
-            <h2 class="card-title">${card.title}</h2>
+            <h2 class="card-title">${card.name}</h2>
             <p class="card-text">${card.description}</p>
-            <p class="text-muted">Категория: ${card.category}</p>
+            <p class="text-muted">Категория: ${card.type}</p>
           </div>
         </div>
       `);

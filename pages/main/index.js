@@ -2,7 +2,7 @@ import { HeaderComponent } from "../../components/header/index.js";
 import { FilterComponent } from "../../components/filter/index.js";
 import { CardComponent } from "../../components/card/index.js";
 import { mockData } from "../../mock/data.js";
-import { DetailsPage } from "../details/index.js";
+import { DetailsPage } from "../about/index.js";
 
 export class MainPage {
   constructor(parent) {
@@ -12,7 +12,7 @@ export class MainPage {
   }
 
   getCategories() {
-    return [...new Set(this.data.map(item => item.category))];
+    return [...new Set(this.data.map(item => item.type))];
   }
 
   onCardClick(id) {
@@ -21,15 +21,15 @@ export class MainPage {
   }
 
   onDeleteCard(id) {
-    this.data = this.data.filter(card => card.id !== id);
-    this.filteredData = this.filteredData.filter(card => card.id !== id);
+    this.data = this.data.filter(card_msm => card_msm.id !== id);
+    this.filteredData = this.filteredData.filter(card_msm => card_msm.id !== id);
     this.renderCards();
   }
 
-  onFilter(category) {
-    this.filteredData = category === "all" 
+  onFilter(type) {
+    this.filteredData = type === "all" 
       ? [...this.data] 
-      : this.data.filter(item => item.category === category);
+      : this.data.filter(card_msm => card_msm.type === type);
     this.renderCards();
   }
 
@@ -46,9 +46,9 @@ export class MainPage {
     const cardsContainer = document.getElementById('cards-container');
     cardsContainer.innerHTML = '';
     
-    this.filteredData.forEach(card => {
+    this.filteredData.forEach(card_msm => {
       const cardComponent = new CardComponent(cardsContainer, this.onDeleteCard.bind(this));
-      cardComponent.render(card, () => this.onCardClick(card.id));
+      cardComponent.render(card_msm, () => this.onCardClick(card_msm.id));
     });
   }
 
@@ -66,7 +66,7 @@ export class MainPage {
     const filter = new FilterComponent(this.parent, this.onFilter.bind(this));
     filter.render(this.getCategories());
 
-    // Кнопка добавления
+    // Кнопка добавления 
     const addButtonHTML = `
       <style> 
             .btn-success{

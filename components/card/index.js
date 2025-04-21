@@ -4,14 +4,14 @@ export class CardComponent {
     this.onDelete = onDelete;
   }
 
-  render(card, onClick) {
+  render(card_msm, onClick) {
     const cardHTML = `
       <div class="card mb-3" style="width: 18rem;">
-        <img src="${card.image}" class="card-img-top">
+        <img src="${card_msm.image}" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">${card.title}</h5>
-          <p class="card-text">${card.description}</p>
-          <p class="text-muted">${card.category}</p>
+          <h5 class="card-title">${card_msm.name}</h5>
+          <p class="card-text">${card_msm.description}</p>
+          <p class="text-muted">${card_msm.type}</p>
           <style>
             /* Обрезка текста с многоточием */
             .card-text {
@@ -38,18 +38,18 @@ export class CardComponent {
               background-color: #ff97fa !important;
             }
           </style>
-          <button class="btn btn-custom-prime details-btn" data-id="${card.id}">Подробнее</button>
-          <button class="btn btn-custom-del delete-btn" data-id="${card.id}">Удалить</button>
+          <button class="btn btn-custom-prime details-btn" data-id="${card_msm.id}">Подробнее</button>
+          <button class="btn btn-custom-del delete-btn" data-id="${card_msm.id}">Удалить</button>
         </div>
       </div>
     `;
     this.parent.insertAdjacentHTML('beforeend', cardHTML);
 
     // Обработчики событий
-    document.querySelector(`.details-btn[data-id="${card.id}"]`)
+    document.querySelector(`.details-btn[data-id="${card_msm.id}"]`)
       .addEventListener('click', onClick);
       
-    document.querySelector(`.delete-btn[data-id="${card.id}"]`)
-      .addEventListener('click', () => this.onDelete(card.id));
+    document.querySelector(`.delete-btn[data-id="${card_msm.id}"]`)
+      .addEventListener('click', () => this.onDelete(card_msm.id));
   }
 }
