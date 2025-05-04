@@ -4,13 +4,13 @@ export class FilterComponent {
       this.onFilter = onFilter;
     }
   
-    render(categories) {
+    render(types) {
       const filterHTML = `
         <div class="mb-3">
           <select class="form-select filter-select">
             <option value="all">Все категории</option>
-            ${categories.map(cat => 
-              `<option value="${cat}">${cat}</option>`
+            ${types.map(categ => 
+              `<option value="${categ}">${categ}</option>`
             ).join('')}
           </select>
         </div>

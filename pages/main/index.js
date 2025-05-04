@@ -1,8 +1,8 @@
-import { HeaderComponent } from "../../components/header/index.js";
-import { FilterComponent } from "../../components/filter/index.js";
-import { CardComponent } from "../../components/card/index.js";
-import { mockData } from "../../mock/data.js";
-import { DetailsPage } from "../about/index.js";
+import { HeaderComponent } from "../../components/header_msm/index.js";
+import { FilterComponent } from "../../components/types_msm/index.js";
+import { CardComponent } from "../../components/card_msm/index.js";
+import { mockData } from "../../mock_msm/data.js";
+import { DetailsPage } from "../about_monster/index.js";
 
 export class MainPage {
   constructor(parent) {
@@ -15,40 +15,40 @@ export class MainPage {
     return [...new Set(this.data.map(item => item.type))];
   }
 
-  onCardClick(id) {
+  onCard_msm_Click(id) {
     const detailsPage = new DetailsPage(this.parent, id);
     detailsPage.render();
   }
 
-  onDeleteCard(id) {
+  onDeleteCard_msm(id) {
     this.data = this.data.filter(card_msm => card_msm.id !== id);
     this.filteredData = this.filteredData.filter(card_msm => card_msm.id !== id);
     this.renderCards();
   }
 
-  onFilter(type) {
+  onFilter_msm_type(type) {
     this.filteredData = type === "all" 
       ? [...this.data] 
       : this.data.filter(card_msm => card_msm.type === type);
     this.renderCards();
   }
 
-  onAddCard() {
+  onAddCard_uuduk() {
     if (this.data.length > 0) {
-      const newCard = { ...this.data[0], id: Date.now() };
-      this.data.push(newCard);
-      this.filteredData.push(newCard);
+      const newCard_uuduk = { ...this.data[0], id: Date.now() };
+      this.data.push(newCard_uuduk);
+      this.filteredData.push(newCard_uuduk);
       this.renderCards();
     }
   }
 
   renderCards() {
-    const cardsContainer = document.getElementById('cards-container');
-    cardsContainer.innerHTML = '';
+    const cardsContainer_msm = document.getElementById('cards-container');
+    cardsContainer_msm.innerHTML = '';
     
     this.filteredData.forEach(card_msm => {
-      const cardComponent = new CardComponent(cardsContainer, this.onDeleteCard.bind(this));
-      cardComponent.render(card_msm, () => this.onCardClick(card_msm.id));
+      const cardComponent_monster = new CardComponent(cardsContainer_msm, this.onDeleteCard_msm.bind(this));
+      cardComponent_monster.render(card_msm, () => this.onCard_msm_Click(card_msm.id));
     });
   }
 
@@ -56,15 +56,15 @@ export class MainPage {
     this.parent.innerHTML = '';
     
     // Хедер
-    const header = new HeaderComponent(this.parent);
-    header.render(() => {
-      const mainPage = new MainPage(this.parent);
-      mainPage.render();
+    const header_msm = new HeaderComponent(this.parent);
+    header_msm.render(() => {
+      const mainPage_msm = new MainPage(this.parent);
+      mainPage_msm.render();
     });
 
     // Фильтр
-    const filter = new FilterComponent(this.parent, this.onFilter.bind(this));
-    filter.render(this.getCategories());
+    const filter_type = new FilterComponent(this.parent, this.onFilter_msm_type.bind(this));
+    filter_type.render(this.getCategories());
 
     // Кнопка добавления 
     const addButtonHTML = `
@@ -74,7 +74,7 @@ export class MainPage {
     this.parent.insertAdjacentHTML('beforeend', addButtonHTML);
 
     document.querySelector('.add-btn')
-      .addEventListener('click', this.onAddCard.bind(this));
+      .addEventListener('click', this.onAddCard_uuduk.bind(this));
 
     // Карточки
     this.renderCards();
