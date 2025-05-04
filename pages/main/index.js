@@ -93,7 +93,7 @@ export class MainPage {
     anagramsBtn.className = 'btn btn-info mb-3 mt-3';
     anagramsBtn.textContent = 'Показать анаграммы';
     anagramsBtn.onclick = () => {
-      const words = ['стол', 'листок', 'слот', 'кот', 'ток'];
+      const words = ['стол', 'листок', 'слот', 'кот', 'ток', 'кто'];
       new AnagramsComponent(this.parent).render(words);
     };
     this.parent.appendChild(anagramsBtn);
