@@ -178,38 +178,27 @@ window.onload = function(){
     document.getElementById("btn_change_color").onclick = function() {
         outputElement.classList.toggle("color"); // Переключаем класс color
     }
+
     document.getElementById("btn_convert_temp").onclick = function() {
+        const value = !selectedOperation ? a : b;
+        const convertedValue = (value * 9/5) + 32;
         if (!selectedOperation) {
-            let celsius = a;
-            if (!isNaN(celsius)) {
-                let fahrenheit = (celsius * 9/5) + 32;
-                a = fahrenheit.toString();
-                outputElement.innerHTML = a;
-            }
+            a = convertedValue.toString();
+            outputElement.innerHTML = a;
         } else {
-            let celsius = b;
-            if (!isNaN(celsius)) {
-                let fahrenheit = (celsius * 9/5) + 32;
-                b = fahrenheit.toString();
-                outputElement.innerHTML = b;
-            }
+            b = convertedValue.toString();
+            outputElement.innerHTML = b;
         }
-    }
+    };
     document.getElementById("btn_convert_temp_c").onclick = function() {
+        const value = !selectedOperation ? a : b;
+        const convertedValue = (value - 32) / 1.8;
         if (!selectedOperation) {
-            let celsius = a;
-            if (!isNaN(celsius)) {
-                let fahrenheit = (celsius - 32) / 1.8;
-                a = fahrenheit.toString();
-                outputElement.innerHTML = a;
-            }
+            a = convertedValue.toString();
+            outputElement.innerHTML = a;
         } else {
-            let celsius = b;
-            if (!isNaN(celsius)) {
-                let fahrenheit = (celsius - 32) / 1.8;
-                b = fahrenheit.toString();
-                outputElement.innerHTML = b;
-            }
+            b = convertedValue.toString();
+            outputElement.innerHTML = b;
         }
     }
     };
