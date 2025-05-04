@@ -23,15 +23,6 @@ export class DetailsPage {
     // Детали карточки
     if (card) {
       this.parent.insertAdjacentHTML('beforeend', `
-        <style> 
-            .card {
-            background-color: #2d1f3e;
-              display: flex;
-              flex-direction: column;
-              height: 100%;
-              color: #ffffff;
-            }
-        </style>
         <div class="card">
           <img src="${card.image}" class="card-img-top" style="max-width: 300px; height: auto;">
           <div class="card-body">

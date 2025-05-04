@@ -5,14 +5,6 @@ export class HeaderComponent {
   
     render(onHomeClick) {
       const headerHTML = `
-      <style>
-       .navbar-expand-lg{
-          background-color: #3e793f !important
-        }
-        .btn-outline-primar{
-          background-color: #ff97fa !important;
-        }
-      </style>
         <nav class="navbar navbar-expand-lg mb-4">
           <div class="container-fluid">
             <button class="btn btn-outline-primar home-btn me-2">

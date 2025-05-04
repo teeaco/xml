@@ -1,0 +1,40 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #4a1f4a;
+}
+
+/* Card */
+.card {
+    background-color: #2d1f3e;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      color: #ffffff;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 60px;
+}
+.btn-custom-del {
+    background-color: #ffc500 !important;
+  }
+.btn-custom-prime {
+    background-color: #ff97fa !important;
+}
+
+/*header*/
+.navbar-expand-lg{
+    background-color: #3e793f !important
+  }
+.btn-outline-primar{
+    background-color: #ff97fa !important;
+  }
+
+.btn-success{
+    background-color: #ffc500 !important;
+  }

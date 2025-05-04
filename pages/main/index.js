@@ -68,11 +68,6 @@ export class MainPage {
 
     // Кнопка добавления 
     const addButtonHTML = `
-      <style> 
-            .btn-success{
-              background-color: #ffc500 !important;
-            }
-      </style>
       <button class="btn btn-success mb-3 add-btn">Добавить карточку</button>
       <div id="cards-container" class="d-flex flex-wrap gap-3"></div>
     `;

@@ -12,32 +12,6 @@ export class CardComponent {
           <h5 class="card-title">${card_msm.name}</h5>
           <p class="card-text">${card_msm.description}</p>
           <p class="text-muted">${card_msm.type}</p>
-          <style>
-            /* Обрезка текста с многоточием */
-            .card-text {
-              display: -webkit-box;
-              -webkit-line-clamp: 3;  /* Ограничение в 3 строки */
-              -webkit-box-orient: vertical;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              min-height: 60px;  /* Фиксированная высота для 3 строк */
-            }
-                /* Фиксируем кнопки внизу карточки */
-            .card {
-            background-color: #2d1f3e;
-              display: flex;
-              flex-direction: column;
-              height: 100%;
-              color: #ffffff;
-            }
-            /* Локальная перезапись */
-            .btn-custom-del {
-              background-color: #ffc500 !important;
-            }
-            .btn-custom-prime {
-              background-color: #ff97fa !important;
-            }
-          </style>
           <button class="btn btn-custom-prime details-btn" data-id="${card_msm.id}">Подробнее</button>
           <button class="btn btn-custom-del delete-btn" data-id="${card_msm.id}">Удалить</button>
         </div>
