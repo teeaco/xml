@@ -1,6 +1,6 @@
 import { HeaderComponent } from "../../components/header/index.js";
 import { FilterComponent } from "../../components/filter/index.js";
-import { CardComponent } from "../../components/card/index.js";
+import { CardComponent } from "../../components/card_msm/index.js";
 import { mockData } from "../../mock/data.js";
 import { DetailsPage } from "../details/index.js";
 import { AnagramsComponent } from "../../components/anagrams/index.js";
