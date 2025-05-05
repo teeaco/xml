@@ -84,7 +84,6 @@ export class MainPage {
     );
   }
 
-// MainPage.js (часть с ДЗ)
 renderDzButtons() {
   const container = document.createElement('div');
   container.className = 'dz-buttons-container mt-4 p-3 rounded';
