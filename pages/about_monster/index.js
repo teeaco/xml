@@ -1,5 +1,5 @@
-import { HeaderComponent } from "../../components/header/index.js";
-import { mockData } from "../../mock/data.js";
+import { HeaderComponent } from "../../components/header_msm/index.js";
+import { mockData } from "../../mock_msm/data.js";
 import { MainPage } from "../main/index.js";
 
 export class DetailsPage {
@@ -9,7 +9,7 @@ export class DetailsPage {
   }
 
   render() {
-    const card = mockData.find(item => item.id === this.id);
+    const card_msm = mockData.find(monster => monster.id === this.id);
     
     this.parent.innerHTML = '';
     
@@ -21,23 +21,14 @@ export class DetailsPage {
     });
 
     // Детали карточки
-    if (card) {
+    if (card_msm) {
       this.parent.insertAdjacentHTML('beforeend', `
-        <style> 
-            .card {
-            background-color: #2d1f3e;
-              display: flex;
-              flex-direction: column;
-              height: 100%;
-              color: #ffffff;
-            }
-        </style>
         <div class="card">
-          <img src="${card.image}" class="card-img-top" style="max-width: 300px; height: auto;">
+          <img src="${card_msm.image}" class="card-img-top" style="max-width: 300px; height: auto;">
           <div class="card-body">
-            <h2 class="card-title">${card.title}</h2>
-            <p class="card-text">${card.description}</p>
-            <p class="text-muted">Категория: ${card.category}</p>
+            <h2 class="card-title">${card_msm.name}</h2>
+            <p class="card-text">${card_msm.description}</p>
+            <p class="text-muted">Категория: ${card_msm.type}</p>
           </div>
         </div>
       `);

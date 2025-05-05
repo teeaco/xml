@@ -1,0 +1,62 @@
+/* Стили для контейнера кнопок ДЗ */
+#dz-buttons-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #2d1f3e;
+    border-radius: 8px;
+  }
+  
+  /* Стили для кнопок ДЗ */
+  .dz-button {
+    background-color: #3e793f; /* Зеленый как btn-success */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .dz-button:hover {
+    background-color: #4e8b4f;
+  }
+  
+  /* Стили для результатов ДЗ */
+  #dz-result {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #3a2b4a;
+    border-radius: 6px;
+    color: white;
+  }
+  
+  /* Стили для сравнения монстров */
+  #comparison-result {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #3a2b4a;
+    border-radius: 6px;
+    color: white;
+  }
+  
+  /* Стили для анаграмм */
+  #anagrams-result {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #3a2b4a;
+    border-radius: 6px;
+    color: white;
+  }
+  
+  .dz-groups {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .dz-groups li {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 3px;
+  }

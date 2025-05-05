@@ -1,0 +1,67 @@
+body{
+  font-family: 'Roboto Mono', monospace;
+  background-color: #4a1f4a;
+}
+
+/* Card */
+.card {
+    background-color: #2d1f3e;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      color: #ffffff;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 60px;
+}
+.btn-custom-del {
+    background-color: #ffc500 !important;
+  }
+.btn-custom-prime {
+    background-color: #ff97fa !important;
+}
+
+/*header*/
+.navbar-expand-lg{
+    background-color: #3e793f !important
+  }
+.btn-outline-primar{
+    background-color: #ff97fa !important;
+  }
+
+.btn-primary{
+    background-color: #2d1f3e !important;
+  }
+
+/*main ind .js*/
+.btn-success{
+    background-color: #ffc500 !important;
+  }
+
+.btn-info{
+  background-color: #ffc500 !important;
+}
+
+.dz-result{
+  background-color: #3e793f !important
+}
+
+
+/* components/dz/styles.css */
+.dz-buttons-container {
+  background-color: #4a1f4a !important; /* Фиолетовый фон */
+}
+
+.dz-button {
+  background-color: #3e793f !important; /* Зеленый фон кнопок */
+  color: white !important;
+  border: none;
+  margin: 5px;
+  
+}
