@@ -22,10 +22,7 @@ export class MainPage {
         this.renderCards();
         
         // Обновляем фильтр если он уже есть
-        if (filterContainer) {
-          new FilterComponent(this.parent, this.onFilter_msm_type.bind(this))
-            .render(this.getCategories());
-        }
+
       }
     });
   }
@@ -100,16 +97,99 @@ export class MainPage {
     filter_type.render(this.getCategories());
 
     // Кнопка добавления 
-    const addButtonHTML = `
-      <button class="btn btn-success mb-3 add-btn">Добавить карточку</button>
+    const buttonsHTML = `
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-success add-btn">Создать копию</button>
+        <button class="btn btn-primary create-monster-btn">Создать монстра</button>
+      </div>
       <div id="cards-container" class="d-flex flex-wrap gap-3"></div>
+      
+      <!-- Модальное окно -->
+      <div class="modal fade" id="createMonsterModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Создание нового монстра</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form id="monster-form">
+                <div class="mb-3">
+                  <label class="form-label">Имя монстра</label>
+                  <input type="text" class="form-control" id="monster-name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Тип</label>
+                  <select class="form-select" id="monster-type" required>
+                    <option value="Магический">Магический</option>
+                    <option value="Природный">Природный</option>
+                    <option value="Огненный">Огненный</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Описание</label>
+                  <textarea class="form-control" id="monster-desc" rows="3" required></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+              <button type="button" class="btn btn-primary" id="confirm-create">Создать</button>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
-    this.parent.insertAdjacentHTML('beforeend', addButtonHTML);
+    this.parent.insertAdjacentHTML('beforeend', buttonsHTML);
 
-    document.querySelector('.add-btn')
-      .addEventListener('click', this.onAddCard_uuduk.bind(this));
+    // Обработчики
+    document.querySelector('.add-btn').addEventListener('click', this.onAddCard_uuduk.bind(this));
+    
+    document.querySelector('.create-monster-btn').addEventListener('click', () => {
+      // Показываем модальное окно
+      const modal = new bootstrap.Modal(document.getElementById('createMonsterModal'));
+      modal.show();
+    });
 
+    document.getElementById('confirm-create').addEventListener('click', () => {
+      this.createNewMonster();
+    });
     // Загружаем данные с сервера
     this.getData();
+  }
+  createNewMonster() {
+    const name = document.getElementById('monster-name').value;
+    const type = document.getElementById('monster-type').value;
+    const description = document.getElementById('monster-desc').value;
+
+    if (!name || !description) {
+      alert('Заполните все обязательные поля!');
+      return;
+    }
+
+    const newMonster = {
+      name,
+      type,
+      description,
+      image: "Dandidoo.png",
+      level: 1,
+      breedingTime: 9
+    };
+    
+    ajax.post(msmUrls.createmsm(), newMonster, (createdMonster) => {
+      if (createdMonster) {
+        // Закрываем модальное окно
+        const modal = bootstrap.Modal.getInstance(document.getElementById('createMonsterModal'));
+        modal.hide();
+        
+        // Добавляем нового монстра
+        this.data.unshift(createdMonster);
+        this.filteredData.unshift(createdMonster);
+        this.renderCards();
+        
+        // Очищаем форму
+        document.getElementById('monster-form').reset();
+      }
+    });
   }
 }
