@@ -1,14 +1,23 @@
 import { HeaderComponent } from "../../components/header_msm/index.js";
 import { FilterComponent } from "../../components/types_msm/index.js";
 import { CardComponent } from "../../components/card_msm/index.js";
-import { mockData } from "../../mock_msm/data.js";
 import { DetailsPage } from "../about_monster/index.js";
+import { ajax } from "../../modules/ajax.js";
+import { msmUrls } from "../../modules/msmUrls.js";
 
 export class MainPage {
   constructor(parent) {
     this.parent = parent;
-    this.data = [...mockData];
-    this.filteredData = [...mockData];
+    this.data = [];
+    this.filteredData = [];
+  }
+
+  getData() {
+    ajax.get(msmUrls.getmsm(), (data) => {
+      this.data = data || []; // Сохраняем данные с сервера
+      this.filteredData = [...this.data];
+      this.renderCards(); // Отрисовываем карточки
+    });
   }
 
   getCategories() {
@@ -21,9 +30,11 @@ export class MainPage {
   }
 
   onDeleteCard_msm(id) {
-    this.data = this.data.filter(card_msm => card_msm.id !== id);
-    this.filteredData = this.filteredData.filter(card_msm => card_msm.id !== id);
-    this.renderCards();
+    ajax.delete(msmUrls.getmsmById(id), () => {
+      this.data = this.data.filter(card_msm => card_msm.id !== id);
+      this.filteredData = this.filteredData.filter(card_msm => card_msm.id !== id);
+      this.renderCards();
+    });
   }
 
   onFilter_msm_type(type) {
@@ -35,20 +46,29 @@ export class MainPage {
 
   onAddCard_uuduk() {
     if (this.data.length > 0) {
-      const newCard_uuduk = { ...this.data[0], id: Date.now() };
-      this.data.push(newCard_uuduk);
-      this.filteredData.push(newCard_uuduk);
-      this.renderCards();
+      const newCard = { 
+        ...this.data[0], 
+        id: Date.now(),
+        name: `New Monster ${Date.now().toString().slice(-4)}`
+      };
+      
+      ajax.post(msmUrls.createmmsm(), newCard, (createdCard) => {
+        this.data.push(createdCard);
+        this.filteredData.push(createdCard);
+        this.renderCards();
+      });
     }
   }
 
   renderCards() {
     const cardsContainer_msm = document.getElementById('cards-container');
+    if (!cardsContainer_msm) return;
+    
     cardsContainer_msm.innerHTML = '';
     
     this.filteredData.forEach(card_msm => {
-      const cardComponent_monster = new CardComponent(cardsContainer_msm, this.onDeleteCard_msm.bind(this));
-      cardComponent_monster.render(card_msm, () => this.onCard_msm_Click(card_msm.id));
+      const cardComponent = new CardComponent(cardsContainer_msm, this.onDeleteCard_msm.bind(this));
+      cardComponent.render(card_msm, () => this.onCard_msm_Click(card_msm.id));
     });
   }
 
@@ -56,17 +76,17 @@ export class MainPage {
     this.parent.innerHTML = '';
     
     // Хедер
-    const header_msm = new HeaderComponent(this.parent);
-    header_msm.render(() => {
-      const mainPage_msm = new MainPage(this.parent);
-      mainPage_msm.render();
+    const header = new HeaderComponent(this.parent);
+    header.render(() => {
+      const mainPage = new MainPage(this.parent);
+      mainPage.render();
     });
 
     // Фильтр
-    const filter_type = new FilterComponent(this.parent, this.onFilter_msm_type.bind(this));
-    filter_type.render(this.getCategories());
+    const filter = new FilterComponent(this.parent, this.onFilter_msm_type.bind(this));
+    filter.render(this.getCategories());
 
-    // Кнопка добавления 
+    // Кнопка добавления и контейнер карточек
     const addButtonHTML = `
       <button class="btn btn-success mb-3 add-btn">Добавить карточку</button>
       <div id="cards-container" class="d-flex flex-wrap gap-3"></div>
@@ -76,7 +96,7 @@ export class MainPage {
     document.querySelector('.add-btn')
       .addEventListener('click', this.onAddCard_uuduk.bind(this));
 
-    // Карточки
-    this.renderCards();
+    // Загрузка данных
+    this.getData();
   }
 }
