@@ -1,4 +1,4 @@
-class msmUrls {
+class MsmUrls {
     constructor() {
         this.baseUrl = 'http://localhost:3000';
     }
@@ -7,7 +7,7 @@ class msmUrls {
         return `${this.baseUrl}/msm`;
     }
 
-    getFilteredmsm(filter) {
+    getFilteredmsm(type) {
         return `${this.baseUrl}/msm?type=${type}`;
     }
 
@@ -28,4 +28,4 @@ class msmUrls {
     }
 }
 
-export const msmUrls = new msmUrls();
+export const msmUrls = new MsmUrls();

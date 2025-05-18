@@ -1,6 +1,8 @@
 import { HeaderComponent } from "../../components/header_msm/index.js";
 import { mockData } from "../../mock_msm/data.js";
 import { MainPage } from "../main/index.js";
+import {ajax} from "../../modules/ajax.js";
+import {msmUrls} from "../../modules/msmUrls.js";
 
 export class DetailsPage {
   constructor(parent, id) {
