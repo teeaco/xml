@@ -16,7 +16,6 @@ export class DetailsPage {
     this.loadCardData();
   }
 
-  // Асинхронная загрузка данных карточки
   async loadCardData() {
     try {
       const { data: card_msm, status } = await ajax.get(msmUrls.getmsmById(this.id));

@@ -33,10 +33,7 @@ export class MainPage {
   }
 
   async render() {
-    // Сначала загружаем данные
     await this.getData();
-    
-    // Только после этого рендерим интерфейс
     this.parent.innerHTML = '';
     
     // Хедер
@@ -46,7 +43,7 @@ export class MainPage {
       mainPage_msm.render();
     });
 
-    // Фильтр (данные уже загружены)
+    // Фильтр 
     const filter_type = new FilterComponent(this.parent, this.onFilter_msm_type.bind(this));
     filter_type.render(this.getCategories());
 
@@ -112,7 +109,6 @@ export class MainPage {
     this.renderCards();
   }
 
-  // ... остальные методы без изменений ...
   onCard_msm_Click(id) {
     const detailsPage = new DetailsPage(this.parent, id);
     detailsPage.render();
