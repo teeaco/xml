@@ -4,7 +4,10 @@
   "description": "jnvsjnme",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,8 @@
   },
   "homepage": "https://github.com/teeaco/xml#readme",
   "dependencies": {
-    "bootstrap": "^5.3.5"
+    "-": "^0.0.1",
+    "bootstrap": "^5.3.5",
+    "vite": "^6.3.5"
   }
 }

@@ -2,87 +2,102 @@ class Ajax {
     /**
      * GET запрос
      * @param {string} url - Адрес запроса
-     * @param {function} callback - Функция обратного вызова (data, status)
+     * @returns {Promise<{data: any, status: number}>} - Промис с ответом
      */
-    get(url, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.send();
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                this._handleResponse(xhr, callback);
-            }
-        };
+    async get(url) {
+        try {
+            const response = await fetch(url);
+            const data = await this._handleResponse(response);
+            return { data, status: response.status };
+        } catch (error) {
+            console.error('GET request failed:', error);
+            throw error;
+        }
     }
 
     /**
      * POST запрос
      * @param {string} url - Адрес запроса
      * @param {object} data - Данные для отправки
-     * @param {function} callback - Функция обратного вызова (data, status)
+     * @returns {Promise<{data: any, status: number}>} - Промис с ответом
      */
-    post(url, data, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', url);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(data));
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                this._handleResponse(xhr, callback);
-            }
-        };
+    async post(url, data) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            const responseData = await this._handleResponse(response);
+            return { data: responseData, status: response.status };
+        } catch (error) {
+            console.error('POST request failed:', error);
+            throw error;
+        }
     }
 
     /**
      * PATCH запрос
      * @param {string} url - Адрес запроса
      * @param {object} data - Данные для обновления
-     * @param {function} callback - Функция обратного вызова (data, status)
+     * @returns {Promise<{data: any, status: number}>} - Промис с ответом
      */
-    patch(url, data, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('PATCH', url);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(data));
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                this._handleResponse(xhr, callback);
-            }
-        };
+    async patch(url, data) {
+        try {
+            const response = await fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            const responseData = await this._handleResponse(response);
+            return { data: responseData, status: response.status };
+        } catch (error) {
+            console.error('PATCH request failed:', error);
+            throw error;
+        }
     }
 
     /**
      * DELETE запрос
      * @param {string} url - Адрес запроса
-     * @param {function} callback - Функция обратного вызова (data, status)
+     * @returns {Promise<{data: any, status: number}>} - Промис с ответом
      */
-    delete(url, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('DELETE', url);
-        xhr.send();
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                this._handleResponse(xhr, callback);
-            }
-        };
+    async delete(url) {
+        try {
+            const response = await fetch(url, {
+                method: 'DELETE',
+            });
+            const data = await this._handleResponse(response);
+            return { data, status: response.status };
+        } catch (error) {
+            console.error('DELETE request failed:', error);
+            throw error;
+        }
     }
 
     /**
      * Обработчик ответа (приватный метод)
-     * @param {XMLHttpRequest} xhr - Объект запроса
-     * @param {function} callback - Функция обратного вызова
+     * @param {Response} response - Объект ответа fetch
+     * @returns {Promise<any>} - Промис с распарсенными данными
      */
-    _handleResponse(xhr, callback) {
+    async _handleResponse(response) {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         try {
-            const data = xhr.responseText ? JSON.parse(xhr.responseText) : null;
-            callback(data, xhr.status);
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return await response.json();
+            }
+            return await response.text();
         } catch (e) {
-            console.error('Ошибка парсинга JSON:', e);
-            callback(null, xhr.status);
+            console.error('Ошибка парсинга ответа:', e);
+            return null;
         }
     }
 }

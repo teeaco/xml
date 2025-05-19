@@ -9,16 +9,18 @@ export class DetailsPage {
     this.id = id;
     this.isEditing = false;
     this.currentCard = null;
-    this.backupCard = null; // Добавляем резервную копию для отмены изменений
+    this.backupCard = null; // Резервная копия для отмены изменений
   }
 
   render() {
     this.loadCardData();
   }
 
-  // Выносим загрузку данных в отдельный метод
-  loadCardData() {
-    ajax.get(msmUrls.getmsmById(this.id), (card_msm, status) => {
+  // Асинхронная загрузка данных карточки
+  async loadCardData() {
+    try {
+      const { data: card_msm, status } = await ajax.get(msmUrls.getmsmById(this.id));
+      
       if (status === 200 && card_msm) {
         this.currentCard = card_msm;
         this.backupCard = {...card_msm}; // Сохраняем копию
@@ -27,7 +29,11 @@ export class DetailsPage {
         this.currentCard = null;
       }
       this.renderCardView();
-    });
+    } catch (error) {
+      console.error('Ошибка при загрузке данных карточки:', error);
+      this.currentCard = null;
+      this.renderCardView();
+    }
   }
 
   renderCardView() {
@@ -102,9 +108,9 @@ export class DetailsPage {
       </div>
     `);
 
-    document.getElementById('edit-form').addEventListener('submit', (e) => {
+    document.getElementById('edit-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      this.saveChanges();
+      await this.saveChanges();
     });
 
     document.getElementById('cancel-btn').addEventListener('click', () => {
@@ -114,6 +120,7 @@ export class DetailsPage {
     });
   }
 
+  // Асинхронное сохранение изменений
   async saveChanges() {
     const updatedCard = {
       ...this.currentCard,
@@ -124,16 +131,21 @@ export class DetailsPage {
     };
 
     try {
-      ajax.patch(msmUrls.updatemsmById(this.id), updatedCard, (response, status) => {
-        if (status === 200 && response) {
-          this.currentCard = response;
-          this.backupCard = {...response}; 
-          this.isEditing = false;
-          this.renderCardView();
-        }
-      });
+      const { data: response, status } = await ajax.patch(
+        msmUrls.updatemsmById(this.id), 
+        updatedCard
+      );
+
+      if (status === 200 && response) {
+        this.currentCard = response;
+        this.backupCard = {...response};
+        this.isEditing = false;
+        this.renderCardView();
+        this.showNotification('Изменения успешно сохранены');
+      }
     } catch (error) {
       console.error('Ошибка при сохранении:', error);
+      this.showNotification('Ошибка при сохранении изменений', 'error');
     }
   }
 

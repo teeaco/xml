@@ -3,6 +3,8 @@ export class FilterComponent {
       this.parent = parent;
       this.onFilter = onFilter;
     }
+
+    
   
     render(types) {
       const filterHTML = `
@@ -17,7 +19,6 @@ export class FilterComponent {
       `;
       this.parent.insertAdjacentHTML('beforeend', filterHTML);
   
-      document.querySelector('.filter-select')
-        .addEventListener('change', (e) => this.onFilter(e.target.value));
+      document.querySelector('.filter-select').addEventListener('change', (e) => this.onFilter(e.target.value));
     }
-  }
+  } 
