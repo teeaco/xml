@@ -9,7 +9,7 @@ import {msmUrls} from "../../modules/msmUrls.js";
 export class MainPage {
   constructor(parent) {
     this.parent = parent;
-    this.data = [...mockData]; // Инициализация моками
+    this.data = [...mockData]; 
     this.filteredData = [...mockData];
   }
 
@@ -17,17 +17,13 @@ export class MainPage {
   getData() {
     ajax.get(msmUrls.getmsm(), (data) => {
       if (data) {
-        this.data = data; // Обновляем данные с сервера
+        this.data = data; 
         this.filteredData = [...data];
         this.renderCards();
-        
-        // Обновляем фильтр если он уже есть
-
       }
     });
   }
 
-  // Остальные методы без изменений
   getCategories() {
     return [...new Set(this.data.map(item => item.type))];
   }
@@ -146,7 +142,7 @@ export class MainPage {
     document.querySelector('.add-btn').addEventListener('click', this.onAddCard_uuduk.bind(this));
     
     document.querySelector('.create-monster-btn').addEventListener('click', () => {
-      // Показываем модальное окно
+      // модальное окно
       const modal = new bootstrap.Modal(document.getElementById('createMonsterModal'));
       modal.show();
     });
@@ -154,7 +150,6 @@ export class MainPage {
     document.getElementById('confirm-create').addEventListener('click', () => {
       this.createNewMonster();
     });
-    // Загружаем данные с сервера
     this.getData();
   }
   createNewMonster() {
@@ -178,16 +173,16 @@ export class MainPage {
     
     ajax.post(msmUrls.createmsm(), newMonster, (createdMonster) => {
       if (createdMonster) {
-        // Закрываем модальное окно
+        // Закрываем окно
         const modal = bootstrap.Modal.getInstance(document.getElementById('createMonsterModal'));
         modal.hide();
         
-        // Добавляем нового монстра
+        // Добавление
         this.data.unshift(createdMonster);
         this.filteredData.unshift(createdMonster);
         this.renderCards();
         
-        // Очищаем форму
+        // Очистка формы
         document.getElementById('monster-form').reset();
       }
     });

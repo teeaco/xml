@@ -9,14 +9,13 @@ export class DetailsPage {
     this.id = id;
     this.isEditing = false;
     this.currentCard = null;
-    this.backupCard = null; // Добавляем резервную копию для отмены изменений
+    this.backupCard = null; 
   }
 
   render() {
     this.loadCardData();
   }
 
-  // Выносим загрузку данных в отдельный метод
   loadCardData() {
     ajax.get(msmUrls.getmsmById(this.id), (card_msm, status) => {
       if (status === 200 && card_msm) {
